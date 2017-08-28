@@ -1,7 +1,8 @@
 ---
 - include: setup_essentials.yml
 
-- hosts: localhost
+- name: "Setup prerequisites, mariadb, wkhtmltopdf, nodejs and psutil"
+  hosts: localhost
   become: yes
   become_user: root
   vars:
@@ -14,12 +15,13 @@
     - mariadb
     - wkhtmltopdf
     - nodejs
-    - psutils
-  tasks:
-   # setup frappe-bench
-   - include: includes/setup_bench.yml
-     when: not run_travis and not without_bench_setup
+    - psutil
 
-   # setup development environment
-   - include: includes/setup_dev_env.yml
-     when: not run_travis and not production
+  tasks:
+  # setup frappe-bench
+  - include: includes/setup_bench.yml
+    when: not run_travis and not without_bench_setup
+
+  # setup development environment
+  - include: includes/setup_dev_env.yml
+    when: not run_travis and not production
