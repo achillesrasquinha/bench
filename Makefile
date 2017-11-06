@@ -35,8 +35,6 @@ loc:
 	find $(SOURCEDIR) -name '*.py' | xargs wc -l
 
 publish:
-	python setup.py sdist
-
-	twine upload -r pypitest dist/*
+	python setup.py sdist upload
 
 	make clean
