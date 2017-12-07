@@ -53,10 +53,10 @@ def update(pull=False, patch=False, build=False, bench=False, auto=False, restar
 	if version_upgrade[0] and not upgrade:
 		print()
 		print()
-		print("This update will cause a major version change in Frappe/ERPNext from {0} to {1}.".format(*version_upgrade[1:]))
+		print(("This update will cause a major version change in Frappe/ERPNext from {0} to {1}.".format(*version_upgrade[1:])))
 		print("This would take significant time to migrate and might break custom apps. Please run `bench update --upgrade` to confirm.")
 		print()
-		print("You can stay on the latest stable release by running `bench switch-to-master` or pin your bench to {0} by running `bench switch-to-v{0}`".format(version_upgrade[1]))
+		print(("You can stay on the latest stable release by running `bench switch-to-master` or pin your bench to {0} by running `bench switch-to-v{0}`".format(version_upgrade[1])))
 		sys.exit(1)
 
 	_update(pull, patch, build, bench, auto, restart_supervisor, requirements, no_backup, upgrade, force=force, reset=reset)
@@ -103,7 +103,7 @@ def _update(pull=False, patch=False, build=False, update_bench=False, auto=False
 	if restart_supervisor or conf.get('restart_supervisor_on_update'):
 		restart_supervisor_processes(bench_path=bench_path)
 
-	print("_"*80)
+	print(("_"*80))
 	print("Bench: Deployment tool for Frappe and ERPNext (https://erpnext.org).")
 	print("Open source depends on your contributions, so please contribute bug reports, patches, fixes or cash and be a part of the community")
 	print()
@@ -131,7 +131,7 @@ def switch_to_branch(branch, apps, upgrade=False):
 	"Switch all apps to specified branch, or specify apps separated by space"
 	from bench.app import switch_to_branch
 	switch_to_branch(branch=branch, apps=list(apps), upgrade=upgrade)
-	print('Switched to ' + branch)
+	print(('Switched to ' + branch))
 	print('Please run `bench update --patch` to be safe from any differences in database schema')
 
 

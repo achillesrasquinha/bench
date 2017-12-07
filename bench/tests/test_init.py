@@ -180,7 +180,7 @@ class TestBenchInit(unittest.TestCase):
 		try:
 			subprocess.check_output(drop_site_cmd, cwd=bench_path)
 		except subprocess.CalledProcessError as err:
-			print(err.output)
+			print((err.output))
 
 		if not archived_sites_path:
 			archived_sites_path = os.path.join(bench_path, 'archived_sites')

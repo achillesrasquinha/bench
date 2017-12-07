@@ -68,7 +68,7 @@ def bump(bench_path, app, bump_type, develop, master, remote, owner, repo_name=N
 	tag_name = create_release(repo_path, new_version, develop=develop, master=master)
 	push_release(repo_path, develop=develop, master=master, remote=remote)
 	create_github_release(repo_path, tag_name, message, remote=remote, owner=owner, repo_name=repo_name)
-	print('Released {tag} for {repo_path}'.format(tag=tag_name, repo_path=repo_path))
+	print(('Released {tag} for {repo_path}'.format(tag=tag_name, repo_path=repo_path)))
 
 def update_branches_and_check_for_changelog(repo_path, develop='develop', master='master', remote='upstream'):
 
@@ -81,7 +81,7 @@ def update_branches_and_check_for_changelog(repo_path, develop='develop', master
 	check_for_unmerged_changelog(repo_path)
 
 def update_branch(repo_path, branch, remote):
-	print("updating local branch of", repo_path, 'using', remote + '/' + branch)
+	print(("updating local branch of", repo_path, 'using', remote + '/' + branch))
 
 	repo = git.Repo(repo_path)
 	g = repo.git
@@ -95,7 +95,7 @@ def check_for_unmerged_changelog(repo_path):
 		raise Exception("Unmerged change log! in " + repo_path)
 
 def get_release_message(repo_path, develop='develop', master='master', remote='upstream'):
-	print('getting release message for', repo_path, 'comparing', master, '...', develop)
+	print(('getting release message for', repo_path, 'comparing', master, '...', develop))
 
 	repo = git.Repo(repo_path)
 	g = repo.git
@@ -109,7 +109,7 @@ def bump_repo(repo_path, bump_type, develop='develop', master='master'):
 	current_version = get_current_version(repo_path)
 	new_version = get_bumped_version(current_version, bump_type)
 
-	print('bumping version from', current_version, 'to', new_version)
+	print(('bumping version from', current_version, 'to', new_version))
 
 	set_version(repo_path, new_version)
 	return new_version
@@ -192,7 +192,7 @@ def set_filename_version(filename, version_number, pattern):
 		f.write(contents)
 
 def commit_changes(repo_path, new_version):
-	print('committing version change to', repo_path)
+	print(('committing version change to', repo_path))
 
 	repo = git.Repo(repo_path)
 	app_name = os.path.basename(repo_path)
@@ -200,7 +200,7 @@ def commit_changes(repo_path, new_version):
 	repo.index.commit('bumped to version {}'.format(new_version))
 
 def create_release(repo_path, new_version, develop='develop', master='master'):
-	print('creating release for version', new_version)
+	print(('creating release for version', new_version))
 	repo = git.Repo(repo_path)
 	g = repo.git
 	g.checkout(master)
@@ -229,15 +229,15 @@ def create_release(repo_path, new_version, develop='develop', master='master'):
 	return tag_name
 
 def handle_merge_error(e, source, target):
-	print('-'*80)
-	print('Error when merging {source} into {target}'.format(source=source, target=target))
+	print(('-'*80))
+	print(('Error when merging {source} into {target}'.format(source=source, target=target)))
 	print(e)
 	print('You can open a new terminal, try to manually resolve the conflict/error and continue')
-	print('-'*80)
+	print(('-'*80))
 	click.confirm('Have you manually resolved the error?', abort=True)
 
 def push_release(repo_path, develop='develop', master='master', remote='upstream'):
-	print('pushing branches', master, develop, 'of', repo_path)
+	print(('pushing branches', master, develop, 'of', repo_path))
 	repo = git.Repo(repo_path)
 	g = repo.git
 	args = [
@@ -246,12 +246,12 @@ def push_release(repo_path, develop='develop', master='master', remote='upstream
 	]
 
 	if develop != 'develop':
-		print('pushing develop branch of', repo_path)
+		print(('pushing develop branch of', repo_path))
 		args.append('develop:develop')
 
 	args.append('--tags')
 
-	print(g.push(remote, *args))
+	print((g.push(remote, *args)))
 
 def create_github_release(repo_path, tag_name, message, remote='upstream', owner='frappe', repo_name=None,
 		gh_username=None, gh_password=None):
@@ -287,7 +287,7 @@ def create_github_release(repo_path, tag_name, message, remote='upstream', owner
 			if i !=2:
 				continue
 			else:
-				print(r.json())
+				print((r.json()))
 				raise
 	return r
 

@@ -26,9 +26,9 @@ def cli():
 		return frappe_cmd()
 
 	elif len(sys.argv) > 1 and sys.argv[1]=="--help":
-		print(click.Context(bench_command).get_help())
+		print((click.Context(bench_command).get_help()))
 		print()
-		print(get_frappe_help())
+		print((get_frappe_help()))
 		return
 
 	elif len(sys.argv) > 1 and sys.argv[1] in get_apps():

@@ -43,7 +43,7 @@ def add_domain(site, domain, ssl_certificate, ssl_certificate_key, bench_path='.
 	domains = get_domains(site, bench_path)
 	for d in domains:
 		if (isinstance(d, dict) and d['domain']==domain) or d==domain:
-			print("Domain {0} already exists".format(domain))
+			print(("Domain {0} already exists".format(domain)))
 			return
 
 	if ssl_certificate_key and ssl_certificate:

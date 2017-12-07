@@ -38,7 +38,7 @@ def init(path, apps_path=None, no_procfile=False, no_backups=False,
 		pass
 	else:
 		if os.path.exists(path):
-			print('Directory {} already exists!'.format(path))
+			print(('Directory {} already exists!'.format(path)))
 			raise Exception("Site directory already exists")
 		os.makedirs(path)
 
@@ -86,17 +86,17 @@ def init(path, apps_path=None, no_procfile=False, no_backups=False,
 
 def clone_apps_from(bench_path, clone_from):
 	from .app import install_app
-	print('Copying apps from {0}...'.format(clone_from))
+	print(('Copying apps from {0}...'.format(clone_from)))
 	subprocess.check_output(['cp', '-R', os.path.join(clone_from, 'apps'), bench_path])
 
-	print('Copying node_modules from {0}...'.format(clone_from))
+	print(('Copying node_modules from {0}...'.format(clone_from)))
 	subprocess.check_output(['cp', '-R', os.path.join(clone_from, 'node_modules'), bench_path])
 
 	def setup_app(app):
 		# run git reset --hard in each branch, pull latest updates and install_app
 		app_path = os.path.join(bench_path, 'apps', app)
 		if os.path.exists(os.path.join(app_path, '.git')):
-			print('Cleaning up {0}'.format(app))
+			print(('Cleaning up {0}'.format(app)))
 
 			# remove .egg-ino
 			subprocess.check_output(['rm', '-rf', app + '.egg-info'], cwd=app_path)
@@ -354,7 +354,7 @@ def get_cmd_output(cmd, cwd='.'):
 		return subprocess.check_output(cmd, cwd=cwd, shell=True, stderr=open(os.devnull, 'wb')).decode().strip()
 	except subprocess.CalledProcessError as e:
 		if e.output:
-			print(e.output)
+			print((e.output))
 		raise
 
 def restart_supervisor_processes(bench_path='.', web_workers=False):
@@ -598,8 +598,8 @@ def post_upgrade(from_ver, to_ver, bench_path='.'):
 	from .config.supervisor import generate_supervisor_config
 	from .config.nginx import make_nginx_conf
 	conf = get_config(bench_path=bench_path)
-	print("-"*80)
-	print("Your bench was upgraded to version {0}".format(to_ver))
+	print(("-"*80))
+	print(("Your bench was upgraded to version {0}".format(to_ver)))
 
 	if conf.get('restart_supervisor_on_update'):
 		redis.generate_config(bench_path=bench_path)
@@ -622,7 +622,7 @@ def update_translations_p(args):
 	try:
 		update_translations(*args)
 	except requests.exceptions.HTTPError:
-		print('Download failed for', args[0], args[1])
+		print(('Download failed for', args[0], args[1]))
 
 def download_translations_p():
 	pool = multiprocessing.Pool(4)
@@ -659,7 +659,7 @@ def update_translations(app, lang):
 				f.write(chunk)
 				f.flush()
 
-	print('downloaded for', app, lang)
+	print(('downloaded for', app, lang))
 
 def download_chart_of_accounts():
 	charts_dir = os.path.join('apps', "erpnext", "erpnext", 'accounts', 'chart_of_accounts', "submitted")
@@ -753,7 +753,7 @@ def set_git_remote_url(git_url, bench_path='.'):
 	app = git_url.rsplit('/', 1)[1].rsplit('.', 1)[0]
 
 	if app not in bench.app.get_apps(bench_path):
-		print("No app named {0}".format(app))
+		print(("No app named {0}".format(app)))
 		sys.exit(1)
 
 	app_dir = bench.app.get_repo_dir(app, bench_path=bench_path)
