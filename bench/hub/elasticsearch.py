@@ -9,11 +9,9 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 def doctype_to_index(name):
-    """
-    TODO: Should be better.
-    """
-    name = name.lower()
-    name = name.replace(' ', '')
+    name = name.strip()           
+    name = name.lower()           
+    name = name.replace(' ', '-')
 
     return name
 
